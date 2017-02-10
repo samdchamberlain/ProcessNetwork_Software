@@ -189,6 +189,8 @@ for fi = 1:nDataFiles
             logwrite(['Creating and running the same operations on ' num2str(opts.nTests) ' surrogates using random shuffle method.'],1);
         elseif opts.SurrogateMethod == 3
             logwrite(['Creating and running the same operations on ' num2str(opts.nTests) ' surrogates using IAAFT method (this may take a while).'],1);
+        elseif opts.SurrogateMethod == 4
+            logwrite(['Creating and running the same operations on ' num2str(opts.nTests) ' surrogates using random walks.'],1);
         end
         
         % Initalize surrogate matrix
@@ -216,7 +218,7 @@ for fi = 1:nDataFiles
         for si = 1:opts.nTests
             if opts.SurrogateMethod == 1
                 Surrogates = SavedSurrogates(:,:,si);
-            elseif ~isempty(find([2 3] == opts.SurrogateMethod,1))
+            elseif ~isempty(find([2 3 4] == opts.SurrogateMethod,1))
                 % Create surrogates using method specified
                 Surrogates = createSurrogates(opts,rawData,1);
             end
@@ -404,6 +406,8 @@ if opts.binType == 2
                 logwrite(['Creating and running the same operations on ' num2str(opts.nTests) ' surrogates using random shuffle method (this may take a while)...'],1);
             elseif opts.SurrogateMethod == 3
                 logwrite(['Creating and running the same operations on ' num2str(opts.nTests) ' surrogates using IAAFT method (this may take a while)...'],1);
+            elseif opts.SurrogateMethod == 4
+                logwrite(['Creating and running the same operations on ' num2str(opts.nTests) ' surrogates using random walks.'],1);
             end
 
             % Initalize surrogate matrix
@@ -427,7 +431,7 @@ if opts.binType == 2
             for si = 1:opts.nTests
                 if opts.SurrogateMethod == 1
                     Surrogates = SavedSurrogates(:,:,si);
-                elseif ~isempty(find([2 3] == opts.SurrogateMethod,1))
+                elseif ~isempty(find([2 3 4] == opts.SurrogateMethod,1))
                     % Create surrogates using method specified
                     [Surrogates] = createSurrogates(opts,rawData,1);
                 end
